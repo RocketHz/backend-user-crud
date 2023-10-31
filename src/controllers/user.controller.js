@@ -45,7 +45,8 @@ const update = catchError(async (req, res) => {
       where: { id },
       returning: true
     });
-  return res.json(user);
+    if (user[0] === 0) return res.status(404).json({ message: "User not found"})
+  return res.json(user[1]);
 })
 
 module.exports = {
